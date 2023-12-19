@@ -1,18 +1,13 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ['class'],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/pages/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   theme: {
-    backgroundImage: {
-      'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      'gradient-conic':
-        'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-    },
     container: {
       center: true,
       padding: '2rem',
@@ -23,12 +18,12 @@ const config: Config = {
     extend: {
       keyframes: {
         'accordion-down': {
-          from: { height: '0' },
+          from: { height: 0 },
           to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+          to: { height: 0 },
         },
       },
       animation: {
@@ -39,4 +34,3 @@ const config: Config = {
   },
   plugins: [require('tailwindcss-animate')],
 }
-export default config

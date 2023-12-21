@@ -8,4 +8,12 @@ export interface Field {
 export interface FormFieldListProps {
   fieldList: Field[]
   setFieldList: Dispatch<SetStateAction<Field[]>>
+  selectField: (id: string) => void
+  removeField: (id: string) => void
+}
+
+export interface FieldItemProps {
+  field: Field
+  selectField: (id: string) => void
+  removeField: (id: string) => void
 }

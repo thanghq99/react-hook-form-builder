@@ -1,8 +1,13 @@
 import React, { FC } from 'react'
 import Section from '../Section'
 import { FormFieldListProps } from '@/interfaces/formFieldList'
+import FieldItem from './FieldItem'
 
-const FormFieldList: FC<FormFieldListProps> = ({ fieldList }) => {
+const FormFieldList: FC<FormFieldListProps> = ({
+  fieldList,
+  selectField,
+  removeField,
+}) => {
   return (
     <Section
       title="Form fields"
@@ -12,11 +17,16 @@ const FormFieldList: FC<FormFieldListProps> = ({ fieldList }) => {
         'You can save the form config by clicking the Save configuration at the bottom',
       ]}
     >
-      {fieldList.map((field) => (
-        <p key={field.id}>
-          {field.id} - {field.name}
-        </p>
-      ))}
+      <div className="flex flex-col gap-2">
+        {fieldList.map((field) => (
+          <FieldItem
+            key={field.id}
+            field={field}
+            selectField={selectField}
+            removeField={removeField}
+          />
+        ))}
+      </div>
     </Section>
   )
 }

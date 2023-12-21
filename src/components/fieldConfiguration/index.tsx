@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import Section from '../Section'
 import { Button } from '../ui/button'
 import { PlusCircle } from 'lucide-react'
@@ -19,23 +19,41 @@ import { Field } from '@/interfaces/formFieldList'
 import { v4 as uuidv4 } from 'uuid'
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
+  name: z
+    .string()
+    .min(1, { message: 'Field name must have atleast one character' }),
 })
 
-const FieldConfiguration: FC<FieldConfigurationProps> = ({ addField }) => {
+export const DEFAULT_VALUES = {
+  id: '',
+  name: '',
+}
+
+const FieldConfiguration: FC<FieldConfigurationProps> = ({
+  addField,
+  updateField,
+  field,
+}) => {
   const form = useForm<Field>({
     mode: 'onChange',
-    defaultValues: {
-      id: '',
-      name: '',
-    },
+    defaultValues: useMemo(() => {
+      return field ? field : DEFAULT_VALUES
+    }, [field]),
     resolver: zodResolver(formSchema),
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    addField({ ...values, id: uuidv4() })
+  useEffect(() => {
+    console.log(field)
+    form.reset(field ? field : DEFAULT_VALUES)
+  }, [field, form])
+
+  const onSubmit = () => {
+    const formValue = form.getValues()
+    if (field) {
+      updateField(formValue)
+    } else {
+      addField({ ...formValue, id: uuidv4() })
+    }
   }
 
   return (
@@ -59,13 +77,18 @@ const FieldConfiguration: FC<FieldConfigurationProps> = ({ addField }) => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <div className="flex justify-end">
+            {form.getValues('id') ? (
+              <Button type="submit">Update</Button>
+            ) : (
+              <Button type="submit">
+                <PlusCircle className="mr-2" />
+                Add
+              </Button>
+            )}
+          </div>
         </form>
       </Form>
-      <Button>
-        <PlusCircle />
-        Add a new field
-      </Button>
     </Section>
   )
 }

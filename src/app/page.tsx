@@ -1,14 +1,14 @@
 'use client'
 
 import Section from '@/components/Section'
-import FormFieldList from '@/components/formFieldList'
 import FieldConfiguration, {
   DEFAULT_VALUES,
 } from '@/components/fieldConfiguration'
-import { Field } from '@/interfaces/formFieldList'
-import { useState } from 'react'
-import cloneDeep from 'lodash/cloneDeep'
+import FormFieldList from '@/components/formFieldList'
 import { useToast } from '@/components/ui/use-toast'
+import { Field } from '@/interfaces/formFieldList'
+import cloneDeep from 'lodash/cloneDeep'
+import { useState } from 'react'
 
 export default function Home() {
   const [fieldList, setFieldList] = useState<Field[]>([])

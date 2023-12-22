@@ -1,9 +1,14 @@
+import { FieldConfigurationProps } from '@/interfaces/fieldConfiguration'
+import { Field } from '@/interfaces/formFieldList'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { PlusCircle } from 'lucide-react'
 import React, { FC, useEffect, useMemo } from 'react'
+import { useForm } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
+import * as z from 'zod'
+
 import Section from '../Section'
 import { Button } from '../ui/button'
-import { PlusCircle } from 'lucide-react'
-import { FieldConfigurationProps } from '@/interfaces/fieldConfiguration'
-import { useForm } from 'react-hook-form'
 import {
   Form,
   FormControl,
@@ -13,10 +18,6 @@ import {
   FormMessage,
 } from '../ui/form'
 import { Input } from '../ui/input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Field } from '@/interfaces/formFieldList'
-import { v4 as uuidv4 } from 'uuid'
 
 const formSchema = z.object({
   name: z

@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
-import Section from '../Section'
 import { FormFieldListProps } from '@/interfaces/formFieldList'
+import React, { FC } from 'react'
+
+import Section from '../Section'
 import FieldItem from './FieldItem'
 
 const FormFieldList: FC<FormFieldListProps> = ({

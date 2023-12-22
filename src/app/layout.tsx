@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
-import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { ThemeProvider } from '@/components/themeProvider'
 import { Toaster } from '@/components/ui/toaster'
+import { GeistMono } from 'geist/font/mono'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'React Hook Form Builder',

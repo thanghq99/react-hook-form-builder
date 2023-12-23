@@ -1,4 +1,5 @@
 import './globals.css'
+import { FieldListProvider } from '@/components/fieldListProvider'
 import { ThemeProvider } from '@/components/themeProvider'
 import { Toaster } from '@/components/ui/toaster'
 import { GeistMono } from 'geist/font/mono'
@@ -23,8 +24,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
+          <FieldListProvider>
+            {children}
+            <Toaster />
+          </FieldListProvider>
         </ThemeProvider>
       </body>
     </html>

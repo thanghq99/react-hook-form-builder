@@ -1,14 +1,13 @@
-import { FormFieldListProps } from '@/interfaces/formFieldList'
+'use client'
+
+import { useFieldListContext } from '@/hooks/useFieldList'
 import React, { FC } from 'react'
 
 import Section from '../Section'
 import FieldItem from './FieldItem'
 
-const FormFieldList: FC<FormFieldListProps> = ({
-  fieldList,
-  selectField,
-  removeField,
-}) => {
+const FormFieldList: FC = () => {
+  const { fieldList, selectField, removeField } = useFieldListContext()
   return (
     <Section
       title="Form fields"

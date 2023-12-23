@@ -1,4 +1,7 @@
-import { FieldConfigurationProps } from '@/interfaces/fieldConfiguration'
+'use client'
+
+import { useFieldListContext } from '@/hooks/useFieldList'
+import { DEFAULT_VALUES } from '@/interfaces/FieldListContextType'
 import { Field } from '@/interfaces/formFieldList'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from 'lucide-react'
@@ -25,32 +28,23 @@ const formSchema = z.object({
     .min(1, { message: 'Field name must have atleast one character' }),
 })
 
-export const DEFAULT_VALUES = {
-  id: '',
-  name: '',
-}
-
-const FieldConfiguration: FC<FieldConfigurationProps> = ({
-  addField,
-  updateField,
-  field,
-}) => {
+const FieldConfiguration: FC = () => {
+  const { selectedField, addField, updateField } = useFieldListContext()
   const form = useForm<Field>({
     mode: 'onChange',
     defaultValues: useMemo(() => {
-      return field ? field : DEFAULT_VALUES
-    }, [field]),
+      return selectedField ? selectedField : DEFAULT_VALUES
+    }, [selectedField]),
     resolver: zodResolver(formSchema),
   })
 
   useEffect(() => {
-    console.log(field)
-    form.reset(field ? field : DEFAULT_VALUES)
-  }, [field, form])
+    form.reset(selectedField ? selectedField : DEFAULT_VALUES)
+  }, [selectedField, form])
 
   const onSubmit = () => {
     const formValue = form.getValues()
-    if (field) {
+    if (selectedField) {
       updateField(formValue)
     } else {
       addField({ ...formValue, id: uuidv4() })

@@ -2,6 +2,7 @@
 
 import { useToast } from '@/components/ui/use-toast'
 import { FieldListContext } from '@/contexts/FieldListContext'
+import { DEFAULT_VALUES } from '@/interfaces/FieldListContextType'
 import { Field } from '@/interfaces/formFieldList'
 import cloneDeep from 'lodash/cloneDeep'
 import { FC, PropsWithChildren, useState } from 'react'
@@ -21,7 +22,7 @@ export const FieldListProvider: FC<PropsWithChildren> = ({ children }) => {
     const newList = cloneDeep(fieldList)
     newList.push(newField)
     setFieldList(newList)
-    setSelectedField(null)
+    setSelectedField(DEFAULT_VALUES)
   }
 
   const updateField = (updatedField: Field) => {

@@ -1,3 +1,4 @@
+import { EInputType } from '@/lib/InputTypes'
 import { Dispatch, SetStateAction } from 'react'
 
 import { Field } from './formFieldList'
@@ -5,6 +6,8 @@ import { Field } from './formFieldList'
 export const DEFAULT_VALUES = {
   id: '',
   name: '',
+  type: EInputType.enum.text,
+  required: false,
 }
 export interface FieldListContextType {
   fieldList: Field[]

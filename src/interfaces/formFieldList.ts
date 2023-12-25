@@ -1,8 +1,11 @@
+import { IInputType } from '@/lib/InputTypes'
 import { Dispatch, SetStateAction } from 'react'
 
 export interface Field {
   id: string
   name: string
+  type: IInputType
+  required: boolean
 }
 
 export interface FormFieldListProps {
